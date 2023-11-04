@@ -18,12 +18,13 @@ const contactSlice = createSlice({
     builder
       .addCase(fetchAllContacts.fulfilled, (state, action) => {
         // action is inferred correctly here
-        state.items = [...state.items, ...action.payload];
+
+        state.items = action.payload;
         state.isLoading = false;
       })
       // You can chain calls, or have separate builder.addCase() lines each time
       .addCase(fetchAddContact.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items = [...state.items, action.payload];
         state.isLoading = false;
       })
       .addCase(fetchDeleteContact.fulfilled, (state, action) => {
